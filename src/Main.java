@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Main {
+    private static Scanner sc = new Scanner(System.in);
     private Restaurant restaurant;
 
     public Main() {
@@ -9,26 +10,25 @@ public class Main {
     }
 
     private void mainMenu() {
-        int val = -1;
+        int in;
         do {
             System.out.println("Menu principal: ");
             System.out.println("1) Afegir taula");
             System.out.println("2) Retirar taula");
             System.out.println("0) Sortir");
-        } while(false);
+            in = sc.nextInt();
+            this.processInput(in);
+        } while(in != 0);
     }
 
     private void processInput(int i) {
-        switch(i) {
-            case 1:
-                this.menuAddTaula();
-            case 2:
-                System.out.println("WIP");
+        switch (i) {
+            case 1 -> this.menuAddTaula();
+            case 2 -> this.menuRemoveTaula();
         }
     }
 
     private void menuCreateRestaurant() {
-        Scanner sc = new Scanner(System.in);
         String name = "";
         while(!verifyRestaurantName(name)) {
             System.out.print("Nom del restaurant: ");
@@ -42,11 +42,23 @@ public class Main {
     }
 
     private void menuAddTaula() {
-        Scanner sc = new Scanner(System.in);
         System.out.print("Inserta el numero de clients nous (espai lliure: " + this.restaurant.getFreeSpace() + "): ");
         int n = sc.nextInt();
         try {
             this.restaurant.addTaula(n);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+        this.restaurant.printTaules();
+    }
+
+    private void menuRemoveTaula() {
+        System.out.println("Escull la taula que marxa:");
+        this.restaurant.printTaules();
+        System.out.println("Num de taula: ");
+        int n = sc.nextInt();
+        try {
+            this.restaurant.removeTaula(n);
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
