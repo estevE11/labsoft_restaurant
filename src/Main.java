@@ -49,12 +49,12 @@ public class Main {
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
-        this.restaurant.printTaules();
+        System.out.println(this.restaurant.toString());
     }
 
     private void menuRemoveTaula() {
         System.out.println("Escull la taula que marxa:");
-        this.restaurant.printTaules();
+        System.out.println(this.restaurant.toString());
         System.out.println("Num de taula: ");
         int n = sc.nextInt();
         try {
